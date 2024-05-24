@@ -1,7 +1,8 @@
 const express = require("express");
 const app = express();
 const port = process.env.PORT || 8080;
-const {getPosts} = require("./controllers/blog")
+const {getPosts} = require("./controllers/blog");
+app.use(express.static('public'));
 
 app.get("/", (req,res) => {
     res.send("<h1>Benvenut* nel mio blog!</h1>")
