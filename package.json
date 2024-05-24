@@ -4,7 +4,7 @@
   "description": "",
   "main": "router.js",
   "scripts": {
-    "dev": "node router.js"
+    "dev": "nodemon router.js"
   },
   "keywords": [],
   "author": "",
