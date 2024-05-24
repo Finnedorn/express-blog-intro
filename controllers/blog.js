@@ -12,26 +12,28 @@ module.exports = {
                 let content = ``;
                 blogPosts.forEach(post=>{
                     content += `
-                    <div>
-                        <h2>${post.titolo}</h2>
-                        <div>
-                          <img style="width: 200px; height: 200px; object-fit: cover;" 
-                          src="${post.immagine}" alt="immagine-di-${post.titolo}"> 
+                    <div class="card overflow-hidden m-2" style="width: 400px">
+                        <div class="overflow-hidden position-relative">
+                            <img style="height: 300px" src="${post.immagine}" class="card-img-top" alt="immagine-di-${post.titolo}">
                         </div>
-                        <p>${post.contenuto}</p>
-                        <ul>
+                        <div class="card-body">
+                            <h5 class="card-title text-center mb-3">${post.titolo}</h5>
+                            <p class="card-text">${post.contenuto.length > 150 ? post.contenuto.slice(0,150) + "..." : post.contenuto}</p>
+                            <ul>
                     `;
                     post.tags.forEach(tag =>{
                         content += `
-                            <li>${tag}</li>
+                            <li class="list-unstyled">${tag}</li>
                         `
                         });
                     content += `
-                        </ul>
+                            </ul>
+                        </div>
                     </div>
                     `
                 });
-                res.send(content);
+                const blogPage = fs.readFileSync("blogPage.html", "utf-8").replace("{{blog}}", content);
+                res.send(blogPage);
             },
             json: () => {
                 res.json(blogPosts);
